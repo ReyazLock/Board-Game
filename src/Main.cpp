@@ -1,8 +1,8 @@
 /**
  * Main.cpp
  * CSE 332S
- * Lab Num:
- * Author:
+ * Lab Num: 04
+ * Author: Mingzhi Cai
 */
 
 #include <iostream>
