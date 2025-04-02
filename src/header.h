@@ -15,7 +15,8 @@ enum valueOutput {
 	USER_QUIT = -1,
 	DRAW_END = -2,
 	USAGE_ERROR = -3,
-	UNEXPECTED_ERROR = -4
+	UNEXPECTED_ERROR = -4,
+	MEMORY_BAD_ALLOC_ERROR = -5
 };
 
 int usage(const char* programName, const char* message);
