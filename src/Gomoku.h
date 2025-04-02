@@ -12,6 +12,8 @@ public:
 	virtual bool prompt(unsigned int& x, unsigned int& y) override;
 	virtual bool turn() override;
 	virtual void print(std::ostream& os) const override;
+
+	friend std::ostream& operator<<(std::ostream& os, const Gomoku& game);
 };
 
 #endif

@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
 		shared_ptr<GameBase> game(GameBase::checkArgs(argc, argv));
 
 		if (!game) {
-			return usage(argv[program_name], "TicTacToe");
+			return usage(argv[program_name], "TicTacToe or Gomoku");
 		}
 
 		int result = game->play();

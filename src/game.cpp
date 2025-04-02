@@ -1,6 +1,7 @@
 #include "header.h"
 #include "game.h"
 #include "TicTacToe.h"
+#include "Gomoku.h"
 #include <iostream>
 
 using namespace std;
@@ -10,11 +11,18 @@ GameBase::GameBase(size_t width, size_t height, const string& player)
 	: currentPlayer(player), board(height, vector<string>(width, " ")), maxPieceLength(1) { }
 
 GameBase* GameBase::checkArgs(int argc, char* argv[]) {
-	if (argc != expected_argc || string(argv[input_file_name]) != "TicTacToe") {
+	if (argc != expected_argc) {
 		return nullptr;
 	}
+	string gameName = argv[input_file_name];
 
-	return new TicTacToe();
+	if (gameName == "TicTacToe") {
+		return new TicTacToe();
+	}
+
+	if (gameName == "Gomoku") {
+		return new Gomoku();
+	}
 }
 
 int GameBase::play() {
@@ -25,7 +33,7 @@ int GameBase::play() {
 		bool continueGame = turn();
 		if (!continueGame) {
 			string player = currentPlayer;
-			cout << turns << " turns played. Player " << player << "quit." << endl;
+			cout << turns << " turns played. Player " << player << " quit." << endl;
 			return USER_QUIT;
 		}
 		turns++;
@@ -41,4 +49,9 @@ int GameBase::play() {
 			return DRAW_END;
 		}
 	}
+}
+
+ostream& operator<<(ostream& os, const GameBase& game) {
+	game.print(os);
+	return os;
 }

@@ -10,7 +10,7 @@
 using namespace std;
 
 
-Gomoku::Gomoku() : GameBase(19, 19, "B") {}
+Gomoku::Gomoku() : GameBase(20, 20, "B") {}
 
 bool Gomoku::done() const {
 	for (int y = 0; y < 19; y++) {
@@ -101,17 +101,27 @@ bool Gomoku::turn() {
 
 	while (true) {
 		unsigned int x, y;
+		bool continueGame = prompt(x, y);
 
-		if (!prompt(x, y)) {
+		if (!continueGame) {
 			return false;
 		}
 
 		if (board[y][x] == " ") {
 			setPiece(x, y, currentPlayer);
-			cout << *this << endl;
-			cout << "Player " << currentPlayer << "'s moves: ";
-			auto& moves = (currentPlayer == "B") ? xMove : oMove;
 
+			if (currentPlayer == "B") {
+				aMove.emplace_back(x, y);
+			}
+			else if (currentPlayer == "W") {
+				bMove.emplace_back(x, y);
+			}
+
+			cout << *this << endl;
+			cout << endl;
+			cout << "Player " << currentPlayer << ": ";
+
+			const auto& moves = (currentPlayer == "B") ? aMove : bMove;
 			for (size_t i = 0; i < moves.size(); i++) {
 				cout << moves[i].first + 1 << "," << moves[i].second + 1;
 
@@ -132,6 +142,29 @@ bool Gomoku::turn() {
 
 void Gomoku::print(ostream& os) const {
 	for (int y = 18; y >= 0; y--) {
-		os << setw(2) << y + 1 << " ";
+		if (y >= 10) {
+			os << setw(2) << " " << y + 1 << " ";
+		}
+		else {
+			os << setw(2) << y + 1 << " ";
+		}
+
+		for (int x = 0; x < 19; x++) {
+			os << setw(maxPieceLength) << board[y][x];
+			if (x < 18) {
+				os << " ";
+			}
+		}
+		os << endl;
 	}
+	os << "  ";
+	for (int x = 0; x < 19; x++) {
+		os << setw(maxPieceLength) << x + 1 << " ";
+	}
+	os << endl;
+}
+
+ostream& operator<<(ostream& os, const Gomoku& game) {
+	game.print(os);
+	return os;
 }

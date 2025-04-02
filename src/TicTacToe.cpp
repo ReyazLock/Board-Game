@@ -106,19 +106,20 @@ bool TicTacToe::turn() {
 			setPiece(x, y, currentPlayer);
 
 			if (currentPlayer == "X") {
-				xMove.emplace_back(x, y);
+				aMove.emplace_back(x, y);
 			}
 			else if (currentPlayer == "O") {
-				oMove.emplace_back(x, y);
+				bMove.emplace_back(x, y);
 			}
 
 			cout << *this << endl;
 			cout << endl;
 			cout << "Player " << currentPlayer << ": ";
 
-			const auto& moves = (currentPlayer == "X") ? xMove : oMove;
+			const auto& moves = (currentPlayer == "X") ? aMove : bMove;
 			for (int i = 0; i < moves.size(); i++) {
 				cout << moves[i].first << ", " << moves[i].second;
+
 				if (i != moves.size() - 1) {
 					cout << "; ";
 				}
@@ -140,21 +141,21 @@ void TicTacToe::print(ostream& os) const {
 	for (int y = 4; y >= 0; y--) {
 		os << y << " ";
 		for (int x = 0; x < 5; x++) {
-			os << left << setw(maxPieceLength) << board[y][x];
+			os << setw(maxPieceLength) << board[y][x];
 			if (x < 4) {
 				os << " ";
 			}
 		}
 		os << endl;
 	}
-	os << " ";
+	os << "  ";
 	for (int x = 0; x < 5; x++) {
-		os << left << setw(maxPieceLength) << x << " ";
+		os << setw(maxPieceLength) << x << " ";
 	}
 	os << endl;
 }
 
-ostream& operator<<(ostream& os, const GameBase& game) {
+ostream& operator<<(ostream& os, const TicTacToe& game) {
 	game.print(os);
 	return os;
 }
