@@ -77,7 +77,7 @@ bool Gomoku::prompt(unsigned int& x, unsigned int& y) {
 			char remain;
 
 			if (iss >> remain) {
-				cout << "Invalid input : extra characters after coorinates." << endl;
+				cout << "Invalid input : extra characters after coordinates." << endl;
 			}
 			else {
 				if (x >= 1 && x <= 19 && y >= 1 && y <= 19) {
