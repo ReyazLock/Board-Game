@@ -1,184 +1,33 @@
 #include "header.h"
 #include "game.h"
 #include <iostream>
-#include <algorithm>
-#include <string>
-#include <sstream>
 
 using namespace std;
 
 
-TicTacToe::TicTacToe() : currentPlayer('X') {
-	for (int y = 0; y < 5; ++y) {
-		for (int x = 0; x < 5; ++x) {
-			board[y][x] = ' ';
-		}
-	}
-}
+GameBase::GameBase() : currentPlayer("X"), board(5, vector<string>(5, " ")) {}
 
-ostream& operator<<(ostream& os, const TicTacToe& game) {
-	for (int y = 4; y >= 0; --y) {
-		os << y << " ";
-
-		for (int x = 0; x < 5; ++x) {
-			os << game.board[y][x];
-			if (x < 4) os << "|";
-		}
-		os << endl;
-	}
-	os << "  ";
-	for (int x = 0; x < 5; ++x) {
-		os << x << " ";
-	}
-
-	os << endl;
-	return os;
-}
-
-bool TicTacToe::done() const {
-	//  check horizontal
-	for (int y = 1; y < 4; y++) {
-		if (board[y][1] != ' ' && board[y][1] == board[y][2] && board[y][1] == board[y][3]) {
-			return true;
-		}
-	}
-
-	//  check vertical
-	for (int x = 1; x < 4; x++) {
-		if (board[1][x] != ' ' && board[1][x] == board[2][x] && board[2][x] == board[3][x]) {
-			return true;
-		}
-	}
-
-	//  check diagonal down-right
-	if (board[1][1] != ' ' && board[1][1] == board[2][2] && board[1][1] == board[3][3]) {
-		return true;
-	}
-
-	//  check diagonal down-left
-	if (board[1][3] != ' ' && board[1][3] == board[2][2] && board[1][3] == board[3][1]) {
-		return true;
-	}
-
-	return false;
-}
-
-bool TicTacToe::draw() const {
-	if (done()) {
-		return false;
-	}
-
-	//check the inner 3x3 board
-	for (int y = 1; y < 4; y++) {
-		for (int x = 1; x < 4; x++) {
-			if (board[y][x] == ' ') {
-				return false;  // an empty cell, not draw
-			}
-		}
-	}
-
-	return true; // all inner board are fixed and game is not done
-}
-
-bool TicTacToe::prompt(unsigned int& x, unsigned int& y) {
-	string input;
-
-	while (true) {
-		cout << "Enter 'quit' or coordinates (x, y) between 1 ~ 3: ";
-		getline(cin, input);
-
-		if (input == "quit") {
-			return false;
-		}
-
-		replace(input.begin(), input.end(), ',', ' ');
-		istringstream iss(input);
-
-		if (iss >> x >> y) {
-			char remain;
-			if (iss >> remain) {
-				cout << "Invalid input: extra characters after coorinates." << endl;
-			}
-			else {
-				if (x >= 1 && x <= 3 && y >= 1 && y <= 3) {
-					return true;
-				}
-				else {
-					cout << "Coordinates must be between 1 and 3, please try again." << endl;
-				}
-			}
-		}
-		else {
-			cout << "Invalid input. Please enter coordinates as x, y or 'quit'." << endl;
-		}
-	}
-}
-
-bool TicTacToe::turn() {
-	cout << "Player " << currentPlayer << "'s turn." << endl;
-
-	while (true) {
-		unsigned int x, y;
-		bool continueGame = prompt(x, y);
-		if (!continueGame) {
-			return false;
-		}
-
-		if (board[y][x] == ' ') {
-			board[y][x] = currentPlayer;
-
-			if (currentPlayer == 'X') {
-				xMove.emplace_back(x, y);
-			}
-			else if (currentPlayer == 'O') {
-				oMove.emplace_back(x, y);
-			}
-
-			cout << *this << endl;
-			cout << endl;
-			cout << "Player " << currentPlayer << ": ";
-
-			const auto& moves = (currentPlayer == 'X') ? xMove : oMove;
-			for (int i = 0; i < moves.size(); i++) {
-				cout << moves[i].first << ", " << moves[i].second;
-				if (i != moves.size() - 1) {
-					cout << "; ";
-				}
-			}
-			cout << endl;
-
-			//  switch players
-			currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
-
-			return true;
-		}
-		else {
-			cout << "Invalid Action: the square is already occupied, please try again." << endl;
-		}
-	}
-}
-
-int TicTacToe::play() {
+int GameBase::play() {
 	cout << *this << endl;
 	int turns = 0;
 
 	while (true) {
 		bool continueGame = turn();
 		if (!continueGame) {
-			char player = (currentPlayer == 'X') ? 'O' : 'X';
-			cout << turns << " turns played. Player " << player << " quit." << endl;
+			string player = currentPlayer;
+			cout << turns << " turns played. Player " << player << "quit." << endl;
 			return USER_QUIT;
 		}
 		turns++;
 
 		if (done()) {
-			char winner = (currentPlayer == 'X') ? 'O' : 'X';
+			string winner = (currentPlayer == "X") ? "O" : "X";
 			cout << "Player " << winner << " wins!" << endl;
 			return SUCCESS;
 		}
 
 		if (draw()) {
-			cout << turns << " turns played, No winning moves remain. It's a draw." << endl;
+			cout << turns << " turns played. No winning moves remain. It's a draw." << endl;
 			return DRAW_END;
 		}
 	}

@@ -7,6 +7,7 @@
 
 #include "game.h"
 #include "header.h"
+#include "TicTacToe.h"
 #include <iostream>
 
 using namespace std;
