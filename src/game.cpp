@@ -35,12 +35,24 @@ int GameBase::play() {
 			string player = currentPlayer;
 			cout << turns << " turns played. Player " << player << " quit." << endl;
 			return USER_QUIT;
-		}
+		} // conld not be done in turn() because it needs to check if the game is done
 		turns++;
 
 		if (done()) {
 			string winner = (currentPlayer == "X") ? "O" : "X";
-			cout << "Player " << winner << " wins!" << endl;
+			
+			
+			if (dynamic_cast<TicTacToe*>(this)) {
+				cout << "Player " << winner << " wins!" << endl;
+			} 
+			else if (dynamic_cast<Gomoku*>(this)) {
+				string gomokuWinner = (winner == "X") ? "B" : "W";
+				cout << "Player " << gomokuWinner << " wins!" << endl;
+			} 
+			else { // 我担心有一些特殊情况
+				cout << "Player " << winner << " wins!" << endl;
+			}
+			
 			return SUCCESS;
 		}
 

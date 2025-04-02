@@ -142,11 +142,11 @@ bool Gomoku::turn() {
 
 void Gomoku::print(ostream& os) const {
 	for (int y = 18; y >= 0; y--) {
-		if (y >= 10) {
-			os << setw(2) << " " << y + 1 << " ";
+		if (y >= 9) { //这里应该这么判断
+			os << " " << y + 1 << " ";
 		}
 		else {
-			os << setw(2) << y + 1 << " ";
+			os << "  " << y + 1 << " ";
 		}
 
 		for (int x = 0; x < 19; x++) {
@@ -157,9 +157,17 @@ void Gomoku::print(ostream& os) const {
 		}
 		os << endl;
 	}
-	os << "  ";
+	os << "    ";
 	for (int x = 0; x < 19; x++) {
-		os << setw(maxPieceLength) << x + 1 << " ";
+		if (x < 9) {
+			os << x + 1 << " ";
+		}
+		else {
+			os << x + 1;
+			if (x < 18) {
+				os << " ";
+			}
+		}
 	}
 	os << endl;
 }
