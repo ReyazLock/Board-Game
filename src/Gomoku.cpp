@@ -20,22 +20,18 @@ bool Gomoku::done() const {
 			}
 			string stone = board[y][x];
 
-			//  Horizontal
 			if (x <= 14 && board[y][x + 1] == stone && board[y][x + 2] == stone && board[y][x + 3] == stone && board[y][x + 4] == stone) {
 				return true;
 			}
 
-			//  Vertical
 			if (x <= 14 && board[y+1][x] == stone && board[y+2][x] == stone && board[y+3][x] == stone && board[y+4][x] == stone) {
 				return true;
 			}
 
-			//  Diagonal down-right
 			if (x <= 14 && y <= 14 && board[y + 1][x + 1] == stone && board[y + 2][x + 2] == stone && board[y + 3][x + 3] == stone && board[y + 4][x + 4] == stone) {
 				return true;
 			}
 
-			//  Diagonal down-left
 			if (x >= 4 && y <= 14 && board[y + 1][x - 1] == stone && board[y + 2][x - 2] == stone && board[y + 3][x - 3] == stone && board[y + 4][x - 4] == stone) {
 				return true;
 			}
@@ -142,7 +138,7 @@ bool Gomoku::turn() {
 
 void Gomoku::print(ostream& os) const {
 	for (int y = 18; y >= 0; y--) {
-		if (y >= 9) { //这里应该这么判断
+		if (y >= 9) {
 			os << " " << y + 1 << " ";
 		}
 		else {

@@ -41,7 +41,6 @@ int GameBase::play() {
 		if (done()) {
 			string winner = (currentPlayer == "X") ? "O" : "X";
 			
-			
 			if (dynamic_cast<TicTacToe*>(this)) {
 				cout << "Player " << winner << " wins!" << endl;
 			} 
