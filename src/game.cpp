@@ -1,11 +1,23 @@
 #include "header.h"
 #include "game.h"
+#include "TicTacToe.h"
 #include <iostream>
 
 using namespace std;
 
 
-GameBase::GameBase() : currentPlayer("X"), board(5, vector<string>(5, " ")) {}
+GameBase::GameBase() : currentPlayer("X"), board(5, vector<string>(5, " ")), maxPieceLength(1) {}
+
+GameBase* GameBase::checkArgs(int argc, char* argv[]) {
+	if (argc != expected_argc) {
+		return nullptr;
+	}
+	if (string(argv[input_file_name]) != "TicTacToe") {
+		return nullptr;
+	}
+
+	return new TicTacToe();
+}
 
 int GameBase::play() {
 	cout << *this << endl;

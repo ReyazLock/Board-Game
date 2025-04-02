@@ -14,16 +14,19 @@ using namespace std;
 
 
 int main(int argc, char* argv[]) {
-    if (argc != expected_argc || string(argv[input_file_name]) != "TicTacToe") {
+    GameBase* game = GameBase::checkArgs(argc, argv);
+    if (!game) {
         return usage(argv[program_name], "TicTacToe");
     }
 
     try {
-        TicTacToe game;
-        return game.play();
+        int result = game->play();
+        delete game;
+        return result;
     }
     catch (...) {
-        cerr << "An unexpected error occured." << endl;
+        delete game;
+        cout << "An unexpected error occuted." << endl;
         return UNEXPECTED_ERROR;
     }
 }

@@ -5,6 +5,7 @@
 #include <algorithm>
 #include <string>
 #include <sstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -96,12 +97,13 @@ bool TicTacToe::turn() {
 	while (true) {
 		unsigned int x, y;
 		bool continueGame = prompt(x, y);
+
 		if (!continueGame) {
 			return false;
 		}
 
 		if (board[y][x] == " ") {
-			board[y][x] = currentPlayer;
+			setPiece(x, y, currentPlayer);
 
 			if (currentPlayer == "X") {
 				xMove.emplace_back(x, y);
@@ -139,14 +141,21 @@ void TicTacToe::print(ostream& os) const {
 		os << y << " ";
 
 		for (int x = 0; x < 5; x++) {
-			os << board[y][x] << "|";
+			os << left << setw(maxPieceLength) << board[y][x];
+
+			if (x < 4) {
+				os << "|";
+			}
 		}
 		os << endl;
 	}
-
 	os << " ";
+
 	for (int x = 0; x < 5; x++) {
-		os << x << " ";
+		os << left << setw(maxPieceLength) << x;
+		if (x < 4) {
+			os << " ";
+		}
 	}
 	os << endl;
 }

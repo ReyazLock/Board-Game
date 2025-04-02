@@ -12,9 +12,18 @@ protected:
 	std::string currentPlayer;
 	std::vector<std::pair<unsigned int, unsigned int>> xMove;
 	std::vector<std::pair<unsigned int, unsigned int>> oMove;
+	size_t maxPieceLength;
+
+	void setPiece(unsigned int x, unsigned int y, const std::string& piece) {
+		board[y][x] = piece;
+		if (piece.length() > maxPieceLength) {
+			maxPieceLength = piece.length();
+		}
+	}
 
 public:
 	GameBase();
+	static GameBase* checkArgs(int argc, char* argv[]);
 	virtual ~GameBase() = default;
 	virtual bool done() const = 0;
 	virtual bool draw() const = 0;
