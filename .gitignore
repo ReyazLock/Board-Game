@@ -3,6 +3,9 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# fucking the lab_x
+lab_x
+
 # User-specific files
 *.suo
 *.user
