@@ -1,8 +1,6 @@
 #ifndef HEADER_H
 #define HEADER_H
 
-#include <string>
-
 
 enum valueInput {
 	program_name = 0,
