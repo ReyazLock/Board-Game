@@ -10,7 +10,7 @@
 using namespace std;
 
 
-TicTacToe::TicTacToe() : GameBase() {}
+TicTacToe::TicTacToe() : GameBase(5, 5, "X") {}
 
 bool TicTacToe::done() const {
 	//  check horizontal
@@ -139,23 +139,17 @@ bool TicTacToe::turn() {
 void TicTacToe::print(ostream& os) const {
 	for (int y = 4; y >= 0; y--) {
 		os << y << " ";
-
 		for (int x = 0; x < 5; x++) {
 			os << left << setw(maxPieceLength) << board[y][x];
-
 			if (x < 4) {
-				os << "|";
+				os << " ";
 			}
 		}
 		os << endl;
 	}
 	os << " ";
-
 	for (int x = 0; x < 5; x++) {
-		os << left << setw(maxPieceLength) << x;
-		if (x < 4) {
-			os << " ";
-		}
+		os << left << setw(maxPieceLength) << x << " ";
 	}
 	os << endl;
 }

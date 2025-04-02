@@ -22,8 +22,7 @@ protected:
 	}
 
 public:
-	GameBase();
-	static GameBase* checkArgs(int argc, char* argv[]);
+	GameBase(size_t width, size_t height, const std::string& player);
 	virtual ~GameBase() = default;
 	virtual bool done() const = 0;
 	virtual bool draw() const = 0;
@@ -31,6 +30,7 @@ public:
 	virtual bool turn() = 0;
 	virtual int play();
 	virtual void print(std::ostream& os) const = 0;
+	static GameBase* checkArgs(int argc, char* argv[]);
 	friend std::ostream& operator<<(std::ostream& os, const GameBase& game);
 };
 

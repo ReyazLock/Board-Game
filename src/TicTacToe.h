@@ -1,7 +1,7 @@
 #ifndef TICTACTOE_H
 #define TICTACTOE_H
 
-#include "game.h";
+#include "game.h"
 
 
 class TicTacToe : public GameBase {
