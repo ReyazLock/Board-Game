@@ -4,6 +4,7 @@
 #include "game.h"
 
 
+//  inheritance from the GameBase, game.h for Gomoku
 class Gomoku : public GameBase {
 public:
 	Gomoku();

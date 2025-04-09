@@ -4,6 +4,7 @@
 #include "game.h"
 
 
+//  inheritance from the GameBase, game.h for TicTacToe
 class TicTacToe : public GameBase {
 public:
 	TicTacToe();

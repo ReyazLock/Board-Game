@@ -9,9 +9,10 @@
 
 using namespace std;
 
-
+//  set the size of the board and the first player (X)
 TicTacToe::TicTacToe() : GameBase(5, 5, "X") {}
 
+//  From the four directions to determine whether the victory conditions are met
 bool TicTacToe::done() const {
 	//  check horizontal
 	for (int y = 1; y < 4; y++) {
@@ -40,6 +41,7 @@ bool TicTacToe::done() const {
 	return false;
 }
 
+//  Determine if the game is a draw
 bool TicTacToe::draw() const {
 	if (done()) {
 		return false;
@@ -57,6 +59,7 @@ bool TicTacToe::draw() const {
 	return true; // all inner board are fixed and game is not done
 }
 
+//  Print the information for each turn and determine if the input is correct
 bool TicTacToe::prompt(unsigned int& x, unsigned int& y) {
 	string input;
 
@@ -91,8 +94,9 @@ bool TicTacToe::prompt(unsigned int& x, unsigned int& y) {
 	}
 }
 
+//  Determine the current turn, the position of the piece, and whether the position of the piece is compliant
 bool TicTacToe::turn() {
-	cout << "Player " << currentPlayer << "'s turn." << endl;
+	cout << "Player " << currentPlayer << "'s turn." << endl;  // current player info
 
 	while (true) {
 		unsigned int x, y;
@@ -102,7 +106,7 @@ bool TicTacToe::turn() {
 			return false;
 		}
 
-		if (board[y][x] == " ") {
+		if (board[y][x] == " ") {  //  Determines whether the point of the piece is empty
 			setPiece(x, y, currentPlayer);
 
 			if (currentPlayer == "X") {
@@ -131,12 +135,13 @@ bool TicTacToe::turn() {
 
 			return true;
 		}
-		else {
+		else {  //  not empty, return invalid action info
 			cout << "Invalid Action: the square is already occupied, please try again." << endl;
 		}
 	}
 }
 
+//  print the current board situation, include board and pieces
 void TicTacToe::print(ostream& os) const {
 	for (int y = 4; y >= 0; y--) {
 		os << y << " ";
