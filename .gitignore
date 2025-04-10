@@ -5,7 +5,7 @@
 
 # fucking the lab_x
 lab_x
-
+build/
 # User-specific files
 *.suo
 *.user
