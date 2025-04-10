@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
 		if (!game) {
 			return usage(argv[program_name], "TicTacToe or Gomoku");
 		}
-
+ 
 		int result = game->play();
 		return result;
 	}

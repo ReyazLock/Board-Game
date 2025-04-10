@@ -195,3 +195,9 @@ Player B's turn.
 Enter 'quit' or coordinates(x, y) between 1 ~ 19: 1,2,
 Invalid Action: the square is already occupied, please try again.
 ```
+
+if we input the invalid action, the program will prompt us say it bus error.
+```bash
+(base) ubuntu@arm-oracle:~/Documents/lab4-0xffff_lab_4/build/src$ ./lab_x Babsa
+Bus error (core dumped)
+```
