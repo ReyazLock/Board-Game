@@ -32,8 +32,41 @@ setPiece() - Place a piece on the board
 Static checkArgs() method to handle command-line arguments
 
 
-# Warning and Error Handling
-We guys do a great job! Mingzhi working for the 
+# Make, Warning and Error
+We guys do a great job!
+
+```bash
+(base) ubuntu@arm-oracle:~/Documents/lab4-0xffff_lab_4/build$ cmake ..
+-- The C compiler identification is GNU 11.4.0
+-- The CXX compiler identification is GNU 11.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/ubuntu/Documents/lab4-0xffff_lab_4/build
+```
+```bash
+(base) ubuntu@arm-oracle:~/Documents/lab4-0xffff_lab_4/build$ make
+[ 16%] Building CXX object src/CMakeFiles/lab_x.dir/Main.cpp.o
+[ 33%] Building CXX object src/CMakeFiles/lab_x.dir/header.cpp.o
+[ 50%] Building CXX object src/CMakeFiles/lab_x.dir/TicTacToe.cpp.o
+[ 66%] Building CXX object src/CMakeFiles/lab_x.dir/game.cpp.o
+/home/ubuntu/Documents/lab4-0xffff_lab_4/src/game.cpp: In static member function ‘static GameBase* GameBase::checkArgs(int, char**)’:
+/home/ubuntu/Documents/lab4-0xffff_lab_4/src/game.cpp:26:1: warning: control reaches end of non-void function [-Wreturn-type]
+   26 | }
+      | ^
+[ 83%] Building CXX object src/CMakeFiles/lab_x.dir/Gomoku.cpp.o
+[100%] Linking CXX executable lab_x
+[100%] Built target lab_x
+```
 
 
 # Games
@@ -43,6 +76,15 @@ The TicTacToe class implements:
 3x3 game board with "X" and "O" pieces
 Win condition: 3 pieces in a row, column, or diagonal
 Custom print method for the 3x3 board
+
+## test for the lab_x
+
+Command Line Tests
+lab_x TicTacToe
+Result: Successfully launched TicTacToe game
+
+lab_x Gomoku
+Result: Successfully launched Gomoku game
 
 TicTacToe Testing:
 
