@@ -10,8 +10,10 @@
 using namespace std;
 
 
+//  set the size of the board and first player (Black)
 Gomoku::Gomoku() : GameBase(20, 20, "B") {}
 
+//  From the four directions to determine whether the victory conditions are met
 bool Gomoku::done() const {
 	for (int y = 0; y < 19; y++) {
 		for (int x = 0; x < 19; x++) {
@@ -44,21 +46,24 @@ bool Gomoku::done() const {
 	return false;
 }
 
+//  Determine if the game is a draw
 bool Gomoku::draw() const {
 	if (done()) {
 		return false;
 	}
 
+	//  check all board of there is an empty
 	for (const auto& row : board) {
 		for (const auto& cell : row) {
 			if (cell == " ") {
-				return false;
+				return false;  // not draw if still have empty in the board
 			}
 		}
 	}
-	return true;
+	return true;  // all inner board are fixed and game is not done
 }
 
+//  Print the information for each turn and determine if the input is correct
 bool Gomoku::prompt(unsigned int& x, unsigned int& y) {
 	string input;
 
@@ -96,6 +101,7 @@ bool Gomoku::prompt(unsigned int& x, unsigned int& y) {
 	}
 }
 
+//  Determine the current turn, the position of the piece, and whether the position of the piece is compliant
 bool Gomoku::turn() {
 	cout << "Player " << currentPlayer << "'s turn." << endl;
 
@@ -140,6 +146,7 @@ bool Gomoku::turn() {
 	}
 }
 
+//  print the board and pieces in the board
 void Gomoku::print(ostream& os) const {
 	for (int y = 18; y >= 0; y--) {
 		if (y >= 9) { //这里应该这么判断
