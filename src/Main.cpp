@@ -1,10 +1,3 @@
-/**
- * Main.cpp
- * CSE 332S
- * Lab Num: 04
- * Author: Mingzhi Cai
-*/
-
 #include "game.h"
 #include "header.h"
 #include "TicTacToe.h"
